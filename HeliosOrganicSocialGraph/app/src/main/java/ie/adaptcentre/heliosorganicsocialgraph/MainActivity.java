@@ -26,11 +26,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId()) {
 
             case R.id.voice_btn:
-                Intent VoiceButtonIntent = new Intent(this, VoiceActivity.class);
+                Intent VoiceActivityIntent = new Intent(this, VoiceActivity.class);
+                startActivity(VoiceActivityIntent);
                 break;
 
             case R.id.bluetooth_btn:
-                Intent BluetoothButtonIntent = new Intent(this, BlueToothActivity.class);
+                Intent BluetoothActivityIntent = new Intent(this, BlueToothActivity.class);
+                startActivity(BluetoothActivityIntent);
                 break;
 
         }
