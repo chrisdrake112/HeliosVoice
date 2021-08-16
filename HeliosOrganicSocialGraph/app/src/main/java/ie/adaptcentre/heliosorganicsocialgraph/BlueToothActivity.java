@@ -1,7 +1,7 @@
 package ie.adaptcentre.heliosorganicsocialgraph;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
 
 public class BlueToothActivity extends AppCompatActivity {

@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1828125" />
         <entry key="app/src/main/res/layout/activity_bluetooth.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.21105072463768115" />
         <entry key="app/src/main/res/layout/activity_voice.xml" value="0.21510416666666668" />
       </map>
     </option>

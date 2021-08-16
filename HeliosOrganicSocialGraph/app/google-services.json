@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "386253223300",
+    "project_id": "helios-aded4",
+    "storage_bucket": "helios-aded4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386253223300:android:508e047565ca0429dcd9d1",
+        "android_client_info": {
+          "package_name": "ie.adaptcentre.heliosorganicsocialgraph"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386253223300-7ckgglk9raekudsu4fgeoe5pdco4qo12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjLqD1JuR7AB_v4YA5pcDkK6E5DR4t0Ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386253223300-7ckgglk9raekudsu4fgeoe5pdco4qo12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

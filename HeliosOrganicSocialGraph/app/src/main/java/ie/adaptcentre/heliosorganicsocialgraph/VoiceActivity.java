@@ -6,12 +6,12 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -23,7 +23,6 @@ public class VoiceActivity extends AppCompatActivity {
     public static final int REQUEST_AUDIO_PERMISSION_CODE = 1;
 
     private MediaRecorder recorder;
-    private String mFileName = "";
     private boolean isPlaying = false;
 
     @Override
@@ -35,23 +34,20 @@ public class VoiceActivity extends AppCompatActivity {
         Button RecordButton = findViewById(R.id.Record_btn);
         Button BackToMain = findViewById(R.id.voice_to_main_btn);
 
-        RecordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isPlaying)
-                {
-                    stopRecording();
-                    RecordButton.setText("Play");
-                    isPlaying = false;
-                }
-                else
-                {
-                    startRecording();
-                    RecordButton.setText("Stop");
-                    isPlaying = true;
-                }
-                startRecording();
+        RecordButton.setOnClickListener((View view) -> {
+            if(isPlaying)
+            {
+                stopRecording();
+                RecordButton.setText("Play");
+                isPlaying = false;
             }
+            else
+            {
+                startRecording();
+                RecordButton.setText("Stop");
+                isPlaying = true;
+            }
+            startRecording();
         });
 
     }
@@ -59,7 +55,7 @@ public class VoiceActivity extends AppCompatActivity {
     public void startRecording() {
         if (CheckPermissions()) {
 
-            mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
+            String mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
             mFileName += "/AudioRecording.3gp";
             recorder = new MediaRecorder();
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
