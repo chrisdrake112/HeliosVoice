@@ -3,6 +3,8 @@ package ie.adaptcentre.heliosorganicsocialgraph;
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.os.Environment;
@@ -24,6 +26,7 @@ public class VoiceActivity extends AppCompatActivity {
 
     private MediaRecorder recorder;
     private boolean isPlaying = false;
+    private boolean isFinished = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +38,28 @@ public class VoiceActivity extends AppCompatActivity {
         Button BackToMain = findViewById(R.id.voice_to_main_btn);
 
         RecordButton.setOnClickListener((View view) -> {
+
             if(isPlaying)
             {
-                stopRecording();
+                //stopRecording();
                 RecordButton.setText("Play");
                 isPlaying = false;
+
             }
             else
             {
-                startRecording();
+                //startRecording();
                 RecordButton.setText("Stop");
                 isPlaying = true;
+                isFinished = true;
+
+                if(isFinished)
+                {
+                    Intent UploadActivityIntent = new Intent(this,UploadActivity.class);
+                    startActivity(UploadActivityIntent);
+                }
             }
-            startRecording();
+
         });
 
     }
@@ -79,7 +91,6 @@ public class VoiceActivity extends AppCompatActivity {
     }
 
 
-
     public void stopRecording()
     {
         recorder.stop();
@@ -90,6 +101,7 @@ public class VoiceActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("MissingSuperCall")
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         // this method is called when user will

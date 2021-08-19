@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -63,15 +62,14 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     public void updateUI(GoogleSignInAccount account){
 
         if(account != null){
-            Toast.makeText(this,"U Signed In successfully", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Signed in successfully", Toast.LENGTH_LONG).show();
             startActivity(new Intent(this,MainActivity.class));
 
         }else {
-            Toast.makeText(this,"U Didnt signed in",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Not signed in ",Toast.LENGTH_LONG).show();
         }
 
     }
-
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();

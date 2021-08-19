@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">HeliosOrganicSocialGraph</string>
+    <string name="app_name">HeliosVoice</string>
+    
+    <string-array name="EnvironmentStringArray">
+        <item>No Noise e.g a Library</item>
+        <item>Quiet e.g walking down a street</item>
+        <item>Busy e.g Coffee shop</item>
+        <item>Loud e.g A Pub</item>
+        <item>Very Loud e.g A concert</item>
+    </string-array>
 </resources>
