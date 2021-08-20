@@ -52,7 +52,7 @@
         app:srcCompat="@drawable/icons8_upload_48" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/ToneSpinner"
         android:layout_width="171dp"
         android:layout_height="72dp"
         android:layout_marginBottom="60dp"
@@ -67,7 +67,7 @@
         android:layout_height="29dp"
         android:layout_marginBottom="56dp"
         android:text="Time/Date"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintBottom_toTopOf="@+id/ToneSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

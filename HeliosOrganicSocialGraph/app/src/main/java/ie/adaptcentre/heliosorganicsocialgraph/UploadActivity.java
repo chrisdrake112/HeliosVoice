@@ -15,6 +15,12 @@ public class UploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload);
 
         Spinner spinnerEnvironment = findViewById(R.id.spinnerEnv);
+        Spinner spinnerTone = findViewById(R.id.ToneSpinner);
+
+        ArrayAdapter<CharSequence>toneAdapter = ArrayAdapter.createFromResource(this,R.array.ToneStringArray, android.R.layout.simple_spinner_item);
+        toneAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEnvironment.setAdapter(toneAdapter);
+
         ArrayAdapter<CharSequence>envAdapter = ArrayAdapter.createFromResource(this,R.array.EnvironmentStringArray, android.R.layout.simple_spinner_item);
         envAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEnvironment.setAdapter(envAdapter);
