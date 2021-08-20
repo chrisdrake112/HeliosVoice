@@ -8,4 +8,15 @@
         <item>Loud e.g A Pub</item>
         <item>Very Loud e.g A concert</item>
     </string-array>
+
+    <string-array name="ToneStringArray">
+        <item>Anxious</item>
+        <item>Angry</item>
+        <item>Anxious</item>
+        <item>Empethetic</item>
+        <item>Sarcastic</item>
+    </string-array>
+
+
+
 </resources>
