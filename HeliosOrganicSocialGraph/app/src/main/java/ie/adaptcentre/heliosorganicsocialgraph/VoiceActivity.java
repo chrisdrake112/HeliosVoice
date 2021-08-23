@@ -15,8 +15,10 @@ import android.view.View;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 
 
@@ -25,8 +27,7 @@ public class VoiceActivity extends AppCompatActivity {
     public static final int REQUEST_AUDIO_PERMISSION_CODE = 1;
 
     private MediaRecorder recorder;
-    private boolean isPlaying = false;
-    private boolean isFinished = false;
+    private String recordFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,31 +35,24 @@ public class VoiceActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_voice);
 
-        Button RecordButton = findViewById(R.id.Record_btn);
+        ImageButton RecordImageButton = findViewById(R.id.PlayImageButton);
+        ImageButton StopImageButton = findViewById(R.id.StopImageButton);
         Button BackToMain = findViewById(R.id.voice_to_main_btn);
+        StopImageButton.setEnabled(false);
 
-        RecordButton.setOnClickListener((View view) -> {
+        RecordImageButton.setOnClickListener((View view) -> {
 
-            if(isPlaying)
-            {
-                //stopRecording();
-                RecordButton.setText("Play");
-                isPlaying = false;
+                startRecording();
+                RecordImageButton.setEnabled(false);
+                StopImageButton.setEnabled(true);
+        });
 
-            }
-            else
-            {
-                //startRecording();
-                RecordButton.setText("Stop");
-                isPlaying = true;
-                isFinished = true;
+        StopImageButton.setOnClickListener((View view) -> {
 
-                if(isFinished)
-                {
-                    Intent UploadActivityIntent = new Intent(this,UploadActivity.class);
-                    startActivity(UploadActivityIntent);
-                }
-            }
+                stopRecording();
+                StopImageButton.setEnabled(false);
+                Intent UploadActivityIntent = new Intent(this, UploadActivity.class);
+                startActivity(UploadActivityIntent);
 
         });
 
@@ -67,13 +61,16 @@ public class VoiceActivity extends AppCompatActivity {
     public void startRecording() {
         if (CheckPermissions()) {
 
-            String mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-            mFileName += "/AudioRecording.3gp";
+            String path = this.getExternalFilesDir("/").getAbsolutePath();
+            recordFile = "AudioRecording.3gp";
+            //String mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
+            //mFileName += "/AudioRecording.3gp";
             recorder = new MediaRecorder();
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-            recorder.setOutputFile(mFileName);
+            recorder.setOutputFile(path + "/" + recordFile);
+            Toast.makeText(getApplicationContext(), "Recording Started", Toast.LENGTH_LONG).show();
 
             try {
                 recorder.prepare();
@@ -89,7 +86,6 @@ public class VoiceActivity extends AppCompatActivity {
         }
 
     }
-
 
     public void stopRecording()
     {

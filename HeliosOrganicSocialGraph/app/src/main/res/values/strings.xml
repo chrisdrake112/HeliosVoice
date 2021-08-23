@@ -2,11 +2,15 @@
     <string name="app_name">HeliosVoice</string>
     
     <string-array name="EnvironmentStringArray">
-        <item>No Noise e.g a Library</item>
-        <item>Quiet e.g walking down a street</item>
-        <item>Busy e.g Coffee shop</item>
-        <item>Loud e.g A Pub</item>
-        <item>Very Loud e.g A concert</item>
+        <item>Library</item>
+        <item>Classroom</item>
+        <item>Public Transport</item>
+        <item>Restaurant</item>
+        <item>Business meeting</item>
+        <item>Coffee shop</item>
+        <item>A Pub</item>
+        <item>Concert</item>
+        <item>Other</item>
     </string-array>
 
     <string-array name="ToneStringArray">
