@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Environment;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 
 public class VoiceActivity extends AppCompatActivity {
@@ -27,7 +29,8 @@ public class VoiceActivity extends AppCompatActivity {
     public static final int REQUEST_AUDIO_PERMISSION_CODE = 1;
 
     private MediaRecorder recorder;
-    private String recordFile;
+    public static String recordFile;
+    public static String UploadFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +65,13 @@ public class VoiceActivity extends AppCompatActivity {
         if (CheckPermissions()) {
 
             String path = this.getExternalFilesDir("/").getAbsolutePath();
-            recordFile = "AudioRecording.3gp";
-            //String mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-            //mFileName += "/AudioRecording.3gp";
+            recordFile = UUID.randomUUID() + ".3gp";
             recorder = new MediaRecorder();
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             recorder.setOutputFile(path + "/" + recordFile);
+            String UploadFile = path + "/" + recordFile;
             Toast.makeText(getApplicationContext(), "Recording Started", Toast.LENGTH_LONG).show();
 
             try {
