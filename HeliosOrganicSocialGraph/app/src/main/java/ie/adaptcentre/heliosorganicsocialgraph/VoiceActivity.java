@@ -30,7 +30,8 @@ public class VoiceActivity extends AppCompatActivity {
 
     private MediaRecorder recorder;
     public static String recordFile;
-    public static String UploadFile;
+    public static String uploadFile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,14 @@ public class VoiceActivity extends AppCompatActivity {
         ImageButton StopImageButton = findViewById(R.id.StopImageButton);
         Button BackToMain = findViewById(R.id.voice_to_main_btn);
         StopImageButton.setEnabled(false);
+
+        BackToMain.setOnClickListener((View view) -> {
+
+            Intent MainActivityIntent = new Intent(this, MainActivity.class);
+            startActivity(MainActivityIntent);
+
+        });
+
 
         RecordImageButton.setOnClickListener((View view) -> {
 
@@ -71,7 +80,7 @@ public class VoiceActivity extends AppCompatActivity {
             recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             recorder.setOutputFile(path + "/" + recordFile);
-            String UploadFile = path + "/" + recordFile;
+            uploadFile = path + "/" + recordFile;
             Toast.makeText(getApplicationContext(), "Recording Started", Toast.LENGTH_LONG).show();
 
             try {
@@ -133,4 +142,3 @@ public class VoiceActivity extends AppCompatActivity {
     }
 
 }
-

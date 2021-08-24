@@ -70,7 +70,7 @@
         android:id="@+id/seekTextView"
         android:layout_width="177dp"
         android:layout_height="27dp"
-        android:text="TextVie"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/UploadButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"

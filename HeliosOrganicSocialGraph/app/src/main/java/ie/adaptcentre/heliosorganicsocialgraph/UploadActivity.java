@@ -1,5 +1,6 @@
 package ie.adaptcentre.heliosorganicsocialgraph;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,35 +33,37 @@ import java.util.Map;
 
 public class UploadActivity extends AppCompatActivity {
 
-    private static String noiseLevelHigh = "A lot of background noise";
-    private static String noiseLevelMed = "Little background noise ";
-    private static String noiseLevelLow = "Next to no background noise";
-    private static int low = 25;
-    private static int med = 50;
-    private static int high = 75;
+    private final String noiseLevelHigh = "A lot of background noise";
+    private final String noiseLevelMed = "Little background noise ";
+    private final String noiseLevelLow = "No background noise";
+    private final int low = 25;
+    private final int med = 50;
+    private final int high = 75;
     private int seekBarValue = 0;
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
 
-        Spinner spinnerEnvironment = findViewById(R.id.spinnerEnv);
+        Spinner Environment = findViewById(R.id.spinnerEnv);
         String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
         ImageButton UploadImageButton = findViewById(R.id.UploadButton);
         SeekBar NoiseSeekBar = findViewById(R.id.noiseSeekBar);
         TextView SeekTextView = findViewById(R.id.seekTextView);
-        String spinnerText = spinnerEnvironment.getSelectedItem().toString();
-        Uri audioFile = Uri.fromFile(new File(VoiceActivity.UploadFile));
+        Uri audioFile = Uri.fromFile(new File(VoiceActivity.uploadFile));
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
 
 
         ArrayAdapter<CharSequence> envAdapter = ArrayAdapter.createFromResource(this, R.array.EnvironmentStringArray, android.R.layout.simple_spinner_item);
         envAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerEnvironment.setAdapter(envAdapter);
+        Environment.setAdapter(envAdapter);
+        String spinnerText = Environment.getSelectedItem().toString();
 
         UploadImageButton.setOnClickListener((View view) -> {
+
         Map<String, Object> Audio_data = new HashMap<>();
         Audio_data.put("Date", currentDateTimeString);
         Audio_data.put("AudioFile", VoiceActivity.recordFile);
@@ -82,7 +86,7 @@ public class UploadActivity extends AppCompatActivity {
                     }
                 });
 
-            StorageReference audioRef = storage.getReference(VoiceActivity.UploadFile);
+            StorageReference audioRef = storage.getReference(VoiceActivity.uploadFile);
             UploadTask uploadTask = audioRef.putFile(audioFile);
 
             uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -97,27 +101,28 @@ public class UploadActivity extends AppCompatActivity {
                 }
             });
 
-
+            Intent VoiceActivityIntent = new Intent(this, VoiceActivity.class);
+            startActivity(VoiceActivityIntent);
     });
 
         NoiseSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                if(Integer.valueOf(progress) <= low) {
+                if(progress <= low) {
 
                     SeekTextView.setText(noiseLevelLow);
                     seekBarValue = low;
 
                 }
 
-                else if(Integer.valueOf(progress) <= med){
+                else if(progress <= med){
 
                     SeekTextView.setText(noiseLevelMed);
                     seekBarValue = med;
 
                 }
-                else if(Integer.valueOf(progress) <= high){
+                else if(progress <= high){
 
                     SeekTextView.setText(noiseLevelHigh);
                     seekBarValue = high;
